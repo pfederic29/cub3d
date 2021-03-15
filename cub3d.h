@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/15 17:50:10 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:11:39 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,9 @@ char			*ft_realloc_finale(char **line);
 */
 size_t			ft_strlen(const char *s);
 int				ft_isdigit(int c);
+/*
+** parsing
+*/
+void 			ft_render(char **line);
 
 #endif

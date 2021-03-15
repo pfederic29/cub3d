@@ -12,25 +12,30 @@
 //        ft_render(g_p, line);    
 //}
 
-void ft_render(t_parse *g_p, char **line)
+void ft_render(char **line)
 {
-    int i;
+	int i;
 
-    i = 0;
-    
-    if((*line)[i] == 'R')
-    {
-        i++;
-        g_p->res_w = 0;
-        while((*line)[i] == ' ')
-            i++;
-        
-        while (ft_isdigit((*line)[i]))
-        {
-            g_p->res_w = g_p->res_w * 10 + ((int)(*line)[i] - 48);
-            i++;
-        }
-    }
-
-    printf("\n|Width : %i|\n", g_p->res_w);     
+	i = 0;
+	
+	while (line)
+	{
+		if((*line)[i] == 'R')
+		{
+			i++;
+			g_p->res_w = 0;
+			while (line)
+			{
+				while (ft_isdigit((*line)[i]))
+				{
+					g_p->res_w *= 10 + ((int)(*line)[i] - 48);
+					i++;
+				}
+				i++;
+			}
+		}
+		else
+			write(1, "Error!\n", 7);
+	}
+	printf("\n|Width : %d|\n", g_p->res_w);     
 }
