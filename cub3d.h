@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/15 16:59:50 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:50:10 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ t_parse			*g_p;
 int				get_next_line(int fd, char **line);
 int				just_do_it(char **line, char *buffer);
 
-size_t			ft_strlen(const char *s);
 char			*ft_realloc(char **line);
 char			*ft_realloc_finale(char **line);
+/*
+** utils
+*/
+size_t			ft_strlen(const char *s);
+int				ft_isdigit(int c);
 
 #endif

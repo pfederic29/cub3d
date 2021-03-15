@@ -1,16 +1,16 @@
 #include "cub3d.h"
 
-int parsing(t_parse *g_p)
-{
-    int fd;
-    char **line;
-    int i;
-
-    fd = open("map.cub", O_RDONLY);
-    i = get_next_line(fd, line);
-    if(i == 1)
-    ft_render(g_p, line);    
-}
+//int parsing(t_parse *g_p)
+//{
+//    int fd;
+//    char **line;
+//    int i;
+//
+//    fd = open("map.cub", O_RDONLY);
+//    i = get_next_line(fd, line);
+//    if(i == 1)
+//        ft_render(g_p, line);    
+//}
 
 void ft_render(t_parse *g_p, char **line)
 {
@@ -18,8 +18,6 @@ void ft_render(t_parse *g_p, char **line)
 
     i = 0;
     
-    
-   // printf("%c", (*line)[i]);
     if((*line)[i] == 'R')
     {
         i++;
@@ -34,12 +32,5 @@ void ft_render(t_parse *g_p, char **line)
         }
     }
 
-    printf("%i", g_p->res_w);     
-}
-
-int main()
-{
-    t_parse *g_p;
-    parsing(g_p);
-    return(0);
+    printf("\n|Width : %i|\n", g_p->res_w);     
 }
