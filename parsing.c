@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 17:57:16 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/16 19:36:48 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int parsing(char **line)
 	{
 		if ((*line)[1] != 'O')
 			return (-1);
-		nwall_parse(line);
+		rgb_parse(line, g_p.n_wall);
 	}
 	//else if (*line[0] != '\n')
 	//	return (-1);
@@ -58,7 +58,7 @@ void 	res_parse(char **line)
 	}
 }
 
-void	nwall_parse(char **line)
+void	rgb_parse(char **line, int rgb[3])
 {
 	int i;
 	int	h;
@@ -67,11 +67,9 @@ void	nwall_parse(char **line)
 	i = 1;
 	while ((*line)[i])
 	{
-		printf("\n|current i: %c|\n", (*line)[i]);
 		while (ft_isdigit((*line)[i]) == 1)
 		{
-			g_p.n_wall[h] = g_p.n_wall[h] * 10 + ((int)(*line)[i] - 48);
-			printf("\n|debug NO: %d|\n", g_p.n_wall[h]);
+			rgb[h] = rgb[h] * 10 + ((int)(*line)[i] - 48);
 			i++;
 		}
 		if ((*line)[i] == ',')

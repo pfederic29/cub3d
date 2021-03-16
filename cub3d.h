@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 17:49:53 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/16 19:37:07 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int			ft_isdigit(int c);
 */
 int 		parsing(char **line);
 void		res_parse(char **line);
-void		nwall_parse(char **line);
+void		rgb_parse(char **line, int rgb[3]);
 
 #endif
