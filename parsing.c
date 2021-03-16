@@ -1,41 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
+/*   Updated: 2021/03/16 17:57:16 by lmarzano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-//int parsing(t_parse *g_p)
-//{
-//    int fd;
-//    char **line;
-//    int i;
-//
-//    fd = open("map.cub", O_RDONLY);
-//    i = get_next_line(fd, line);
-//    if(i == 1)
-//        ft_render(g_p, line);    
-//}
-void	struct_init(void)
+int parsing(char **line)
 {
-	g_p.res_w = 0;
-	g_p.res_h = 0;
-	g_p.n_wall[0] = 0;
-	g_p.n_wall[1] = 0;
-	g_p.n_wall[2] = 0;
-	g_p.s_wall[0] = 0;
-	g_p.s_wall[1] = 0;
-	g_p.s_wall[2] = 0;
-	g_p.w_wall[0] = 0;
-	g_p.w_wall[1] = 0;
-	g_p.w_wall[2] = 0;
-	g_p.e_wall[0] = 0;
-	g_p.e_wall[1] = 0;
-	g_p.e_wall[2] = 0;
-	g_p.sky[0] = 0;
-	g_p.sky[1] = 0;
-	g_p.sky[2] = 0;
-	g_p.floor[0] = 0;
-	g_p.floor[1] = 0;
-	g_p.floor[2] = 0;
-	g_p.ceiling[0] = 0;
-	g_p.ceiling[1] = 0;
-	g_p.ceiling[2] = 0;
+	if (*line[0] == 'R')
+		res_parse(line);
+	else if (*line[0] == 'N')
+	{
+		if ((*line)[1] != 'O')
+			return (-1);
+		nwall_parse(line);
+	}
+	//else if (*line[0] != '\n')
+	//	return (-1);
+	return (1);
 }
 
 void 	res_parse(char **line)
@@ -44,33 +33,49 @@ void 	res_parse(char **line)
 	int	h;
 
 	h = 0;
-	printf("\n|Initial string char: %c|\n", *line[0]);
-	if(*line[0] == 'R')
+	i = 1;
+	while (line[i])
 	{
-		i = 1;
-		while (line[i])
+		while ((ft_isdigit((*line)[i]) == 1) || (*line)[i] == ' ')
 		{
-			while ((ft_isdigit((*line)[i]) == 1) || (*line)[i] == ' ')
+			if ((*line)[i] == ' ')
 			{
-				if ((*line)[i] == ' ')
-				{
-					h = 1;
-					break;
-				}
-				g_p.res_w = g_p.res_w * 10 + ((int)(*line)[i] - 48);
-				i++;
+				h = 1;
+				break;
 			}
+			g_p.res_w = g_p.res_w * 10 + ((int)(*line)[i] - 48);
 			i++;
-			if (h == 1 && g_p.res_w != 0)
+		}
+		i++;
+		if (h == 1 && g_p.res_w != 0)
+		{
+			while (ft_isdigit((*line)[i]) == 1)
 			{
-				while (ft_isdigit((*line)[i]) == 1)
-				{
-					g_p.res_h = g_p.res_h * 10 + ((int)(*line)[i] - 48);
-					i++;
-				}
+				g_p.res_h = g_p.res_h * 10 + ((int)(*line)[i] - 48);
+				i++;
 			}
 		}
 	}
-	else
-		write(1, "Error!\n", 7);
+}
+
+void	nwall_parse(char **line)
+{
+	int i;
+	int	h;
+
+	h = 0;
+	i = 1;
+	while ((*line)[i])
+	{
+		printf("\n|current i: %c|\n", (*line)[i]);
+		while (ft_isdigit((*line)[i]) == 1)
+		{
+			g_p.n_wall[h] = g_p.n_wall[h] * 10 + ((int)(*line)[i] - 48);
+			printf("\n|debug NO: %d|\n", g_p.n_wall[h]);
+			i++;
+		}
+		if ((*line)[i] == ',')
+			h++;
+		i++;
+	}
 }

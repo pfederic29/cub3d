@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 13:57:51 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:49:53 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,36 @@
 */
 typedef	struct	s_parse
 {
-	int			res_w;
-	int			res_h;
-	short int	n_wall[3];
-	short int	s_wall[3];
-	short int	w_wall[3];
-	short int	e_wall[3];
-	short int	sky[3];
-	short int	floor[3];
-	short int	ceiling[3];
-	char		map[1920][1080];
+	int		res_w;
+	int		res_h;
+	int		n_wall[3];
+	int		s_wall[3];
+	int		w_wall[3];
+	int		e_wall[3];
+	int		sky[3];
+	int		floor[3];
+	int		ceiling[3];
+	char	map[1920][1080];
 }				t_parse;
 t_parse			g_p;
 /*
 ** functions
 */
-int				get_next_line(int fd, char **line);
-int				just_do_it(char **line, char *buffer);
+int			get_next_line(int fd, char **line);
+int			just_do_it(char **line, char *buffer);
 
-char			*ft_realloc(char **line);
-char			*ft_realloc_finale(char **line);
+char		*ft_realloc(char **line);
+char		*ft_realloc_finale(char **line);
 /*
 ** utils
 */
-size_t			ft_strlen(const char *s);
-int				ft_isdigit(int c);
+size_t		ft_strlen(const char *s);
+int			ft_isdigit(int c);
 /*
 ** parsing
 */
-void			struct_init(void);
-void 			res_parse(char **line);
+int 		parsing(char **line);
+void		res_parse(char **line);
+void		nwall_parse(char **line);
 
 #endif
