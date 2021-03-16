@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/15 18:11:39 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:37:43 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ typedef	struct	s_parse
 	short int	s_wall[3];
 	short int	w_wall[3];
 	short int	e_wall[3];
-	short int	*sky[3];
-	short int	*floor[3];
-	short int	*ceiling[3];
-	char		**map;
+	short int	sky[3];
+	short int	floor[3];
+	short int	ceiling[3];
+	char		map[1920][1080];
 }				t_parse;
-
-t_parse			*g_p;
+t_parse			g_p;
 /*
 ** functions
 */
@@ -59,6 +58,7 @@ int				ft_isdigit(int c);
 /*
 ** parsing
 */
+void		struct_init(void);
 void 			ft_render(char **line);
 
 #endif
