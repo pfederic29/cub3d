@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 12:45:01 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:59:11 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	main()
 	if(i == 1)
 	{
 		struct_init();
-        ft_render(line);
+        res_parse(line);
+		printf("\n|heigth: %d|\n", g_p.res_h);
+		printf("\n|width: %d|\n", g_p.res_w);
 	}
-	printf("\n|Width : %d|\n", g_p.res_w);
 	return (0);
 }

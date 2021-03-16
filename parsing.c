@@ -38,7 +38,7 @@ void	struct_init(void)
 	g_p.ceiling[2] = 0;
 }
 
-void 	ft_render(char **line)
+void 	res_parse(char **line)
 {
 	int i;
 	int	h;
@@ -72,7 +72,5 @@ void 	ft_render(char **line)
 		}
 	}
 	else
-		write(1, "Error!\n", 7);   
-	printf("\n|heigth: %d|\n", g_p.res_h);
-	printf("\n|width: %d|\n", g_p.res_w);
+		write(1, "Error!\n", 7);
 }

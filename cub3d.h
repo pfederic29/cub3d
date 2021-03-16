@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 12:37:43 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:57:51 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				ft_isdigit(int c);
 /*
 ** parsing
 */
-void		struct_init(void);
-void 			ft_render(char **line);
+void			struct_init(void);
+void 			res_parse(char **line);
 
 #endif
