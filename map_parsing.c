@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_utils2.c                                     :+:      :+:    :+:   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 14:27:00 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/17 14:27:02 by lmarzano         ###   ########.fr       */
+/*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
+/*   Updated: 2021/03/17 18:33:29 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_isdigit(int c)
+int	map_parse(char **line, int j)
 {
-	if (c < '0' || c > '9')
-		return (0);
+	int	i;
+
+	i = 0;
+	while (line[i][j])
+	{
+		if (j == 0 || !line[i][j + 1])
+		{
+			while (line[i][j] == ' ' || line[i][j] == '1')
+			{
+				(*g_p.map)[j] = matrix_realloc(line, j);
+				i++;
+			}
+		}
+	}
+	printf("|%s\n|", g_p.map[j]);
 	return (1);
 }

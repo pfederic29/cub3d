@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 19:37:07 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:38:44 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,33 @@ typedef	struct	s_parse
 	int		sky[3];
 	int		floor[3];
 	int		ceiling[3];
-	char	map[1920][1080];
+	char	**map;
+	char	reference[8];
 }				t_parse;
 t_parse			g_p;
 /*
 ** functions
 */
-int			get_next_line(int fd, char **line);
-int			just_do_it(char **line, char *buffer);
+int				get_next_line(int fd, char **line);
+int				just_do_it(char **line, char *buffer);
 
-char		*ft_realloc(char **line);
-char		*ft_realloc_finale(char **line);
+char			**matrix_realloc(char **line, int j);
+char			*ft_realloc(char **line);
+char			*ft_realloc_finale(char **line);
 /*
 ** utils
 */
-size_t		ft_strlen(const char *s);
-int			ft_isdigit(int c);
+size_t			ft_strlen(char *s);
+int				ft_isdigit(int c);
 /*
 ** parsing
 */
-int 		parsing(char **line);
-void		res_parse(char **line);
-void		rgb_parse(char **line, int rgb[3]);
+int				parsing(char **line, int j);
+void			res_parse(char **line);
+void			rgb_parse(char **line, int rgb[3]);
+/*
+** map_parsing
+*/
+int				map_parse(char **line, int j);
 
 #endif
