@@ -6,108 +6,93 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/17 17:19:52 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:33:48 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		parsing(char **line, int j)
+int		parse_sfc(char **line)
 {
-	if ((*line)[0] == 'R')
-		res_parse(line);
-	else if ((*line)[0] == 'N')
-	{
-		if ((*line)[1] != 'O')
-			return (-1);
-		rgb_parse(line, g_p.n_wall);
-		if (g_p.n_wall[0] > 255 || g_p.n_wall[1] > 255 || g_p.n_wall[2] > 255)
-			return (-1);
-	}
-	else if ((*line)[0] == 'S' && (*line)[1] == 'O')
-	{
-		rgb_parse(line, g_p.s_wall);
-		if (g_p.s_wall[0] > 255 || g_p.s_wall[1] > 255 || g_p.s_wall[2] > 255)
-			return (-1);
-	}
-	else if ((*line)[0] == 'S' && (*line)[1] == ' ')
+	if ((*line)[0] == 'S')
 	{
 		rgb_parse(line, g_p.sky);
 		if (g_p.sky[0] > 255 || g_p.sky[1] > 255 || g_p.sky[2] > 255)
 			return (-1);
 	}
-	else if ((*line)[0] == 'W')
-	{
-		if ((*line)[1] != 'E')
-			return (-1);
-		rgb_parse(line, g_p.w_wall);
-		if (g_p.w_wall[0] > 255 || g_p.w_wall[1] > 255 || g_p.w_wall[2] > 255)
-			return (-1);
-	}
-	else if ((*line)[0] == 'E')
-	{
-		if ((*line)[1] != 'A')
-			return (-1);
-		rgb_parse(line, g_p.e_wall);
-		if (g_p.e_wall[0] > 255 || g_p.e_wall[1] > 255 || g_p.e_wall[2] > 255)
-			return (-1);
-	}
 	else if ((*line)[0] == 'F')
 	{
-		if ((*line)[1] != ' ')
-			return (-1);
 		rgb_parse(line, g_p.floor);
 		if (g_p.floor[0] > 255 || g_p.floor[1] > 255 || g_p.floor[2] > 255)
 			return (-1);
 	}
 	else if ((*line)[0] == 'C')
 	{
-		if ((*line)[1] != ' ')
-			return (-1);
 		rgb_parse(line, g_p.ceiling);
 		if (g_p.ceiling[0] > 255 || \
 		g_p.ceiling[1] > 255 || g_p.ceiling[2] > 255)
 			return (-1);
 	}
-	else if ((*line)[0] == ' ' || (*line)[0] == '1')// sono qui!
-	{
-		j++;
-		return (map_parse(line, j));
-	}
-	else if ((*line)[0] != 0)
+	else
 		return (-1);
 	return (1);
 }
 
-void	res_parse(char **line)
+int		parse_wall(char **line)
+{
+	if ((*line)[0] == 'N' && (*line)[1] == 'O')
+	{
+		rgb_parse(line, g_p.n_wall);
+		return ((g_p.n_wall[0] > 255 || g_p.n_wall[1] > 255 ||\
+		g_p.n_wall[2] > 255) ? -1 : 1);
+	}
+	else if ((*line)[0] == 'S' && (*line)[1] == 'O')
+	{
+		rgb_parse(line, g_p.s_wall);
+		return ((g_p.s_wall[0] > 255 || g_p.s_wall[1] > 255 ||\
+		g_p.s_wall[2] > 255) ? -1 : 1);
+	}
+	else if ((*line)[0] == 'W' && (*line)[1] == 'E')
+	{
+		rgb_parse(line, g_p.w_wall);
+		return ((g_p.w_wall[0] > 255 || g_p.w_wall[1] > 255 ||\
+		g_p.w_wall[2] > 255) ? -1 : 1);
+	}
+	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
+	{
+		rgb_parse(line, g_p.e_wall);
+		return ((g_p.e_wall[0] > 255 || g_p.e_wall[1] > 255 ||\
+		g_p.e_wall[2] > 255) ? -1 : 1);
+	}
+	return (-1);
+}
+
+int		res_parse(char **line)
 {
 	int i;
 	int	h;
 
 	h = 0;
-	i = 1;
+	i = 0;
 	while (line[i])
 	{
-		while ((ft_isdigit((*line)[i]) == 1) || (*line)[i] == ' ')
-		{
-			if ((*line)[i] == ' ')
+		if (h == 1)
+			while (ft_isdigit((*line)[i]) == 1)
 			{
-				h = 1;
-				break ;
+				g_p.res_w = g_p.res_w * 10 + ((int)(*line)[i] - 48);
+				i++;
 			}
-			g_p.res_w = g_p.res_w * 10 + ((int)(*line)[i] - 48);
-			i++;
-		}
-		i++;
-		if (h == 1 && g_p.res_w != 0)
-		{
+		else if (h == 2 && ft_isdigit((*line)[i]) == 1)
 			while (ft_isdigit((*line)[i]) == 1)
 			{
 				g_p.res_h = g_p.res_h * 10 + ((int)(*line)[i] - 48);
 				i++;
 			}
-		}
+		if ((*line)[i] == ' ')
+			h++;
+		i++;
 	}
+	return (1);
 }
 
 void	rgb_parse(char **line, int rgb[3])
@@ -128,4 +113,29 @@ void	rgb_parse(char **line, int rgb[3])
 			h++;
 		i++;
 	}
+}
+
+int		parsing(char **line, int j)
+{
+	int	ret;
+
+	if (ft_isdigit((*line)[0]) == 0)
+	{
+		if ((*line)[0] == 'R')
+			ret = res_parse(line);
+		else if ((*line)[1] == ' ')
+			ret = parse_sfc(line);
+		else if ((*line)[1] == 'O' || (*line)[1] == 'E' || (*line)[1] == 'A')
+			ret = parse_wall(line);
+		//else if ((*line)[0] == ' ' || (*line)[0] == '1')// sono qui!
+		//{
+		//	j++;
+		//	return (map_parse(line, j));
+		//}
+		else if (!*line[0])
+			return (1);
+		else
+			return (-1);
+	}
+	return (ret);
 }

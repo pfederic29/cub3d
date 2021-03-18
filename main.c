@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/17 17:31:55 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:46:11 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(void)
 /*
 ** DEBUG : controllo parsing
 */
-	printf("\n|Allowed Chars: %s|\n", g_p.reference);
+	printf("\nAllowed Chars: |%s|\n", g_p.reference);
 	printf("\n|width: %d|\n", g_p.res_w);
 	printf("|heigth: %d|\n", g_p.res_h);
 	printf("|NO: %d, %d, %d|\n", g_p.n_wall[0], g_p.n_wall[1], g_p.n_wall[2]);
