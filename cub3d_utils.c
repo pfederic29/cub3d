@@ -6,13 +6,20 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 17:20:53 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 11:25:46 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:22:25 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isdigit(int c)
+{
+	if (c < '0' || c > '9')
+		return (0);
+	return (1);
+}
+
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -22,6 +29,21 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*s3;
+	size_t	len;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!(s3 = malloc(len + 1)))
+		return (NULL);
+	ft_strlcpy(s3, s1, ft_strlen(s1) + 1);
+	ft_strlcat(s3, (char *)s2, len + 1);
+	return (s3);
 }
 
 char	*ft_realloc(char **line)

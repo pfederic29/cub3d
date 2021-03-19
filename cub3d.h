@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/16 13:57:51 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:37:42 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@
 */
 typedef	struct	s_parse
 {
-	int			res_w;
-	int			res_h;
-	short int	n_wall[3];
-	short int	s_wall[3];
-	short int	w_wall[3];
-	short int	e_wall[3];
-	short int	sky[3];
-	short int	floor[3];
-	short int	ceiling[3];
-	char		map[1920][1080];
+	int		res_w;
+	int		res_h;
+	int		n_wall[3];
+	int		s_wall[3];
+	int		w_wall[3];
+	int		e_wall[3];
+	int		sky[3];
+	int		floor[3];
+	int		ceiling[3];
+	char	**map;
+	char	reference[8];
 }				t_parse;
 t_parse			g_p;
 /*
@@ -47,18 +48,31 @@ t_parse			g_p;
 */
 int				get_next_line(int fd, char **line);
 int				just_do_it(char **line, char *buffer);
-
+/*
+** utils [FULL]
+*/
+int				ft_isdigit(int c);
+size_t			ft_strlen(char *s);
+char			*ft_strjoin(char *s1, char *s2);
 char			*ft_realloc(char **line);
 char			*ft_realloc_finale(char **line);
 /*
-** utils
+** utils_2 [FULL]
 */
-size_t			ft_strlen(const char *s);
-int				ft_isdigit(int c);
+size_t			ft_strlcpy(char *dst, char *src, size_t dstsize);
+size_t			ft_strcount(char *str, char c);
+size_t			ft_strclen(char *s, char c);
+char			**ft_split(char *s, char c);
+size_t			ft_strlcat(char *dst, char *src, size_t dstsize);
 /*
 ** parsing
 */
-void			struct_init(void);
-void 			res_parse(char **line);
+int				parsing(char **line, int j, int fd);
+int				res_parse(char **line);
+void			rgb_parse(char **line, int rgb[3]);
+/*
+** map_parsing
+*/
+int				map_parse(char **line, int j, int fd);
 
 #endif
