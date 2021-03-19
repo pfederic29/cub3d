@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/18 15:33:48 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:40:52 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	rgb_parse(char **line, int rgb[3])
 	}
 }
 
-int		parsing(char **line, int j)
+int		parsing(char **line, int j, int fd)
 {
 	int	ret;
 
@@ -123,15 +123,15 @@ int		parsing(char **line, int j)
 	{
 		if ((*line)[0] == 'R')
 			ret = res_parse(line);
-		else if ((*line)[1] == ' ')
+		else if ((*line)[1] == ' ' && (*line)[2] != ' ')
 			ret = parse_sfc(line);
 		else if ((*line)[1] == 'O' || (*line)[1] == 'E' || (*line)[1] == 'A')
 			ret = parse_wall(line);
-		//else if ((*line)[0] == ' ' || (*line)[0] == '1')// sono qui!
-		//{
-		//	j++;
-		//	return (map_parse(line, j));
-		//}
+		else if ((*line)[0] == ' ' || (*line)[0] == '1')
+		{
+			j++;
+			return (map_parse(line, j, fd));
+		}
 		else if (!*line[0])
 			return (1);
 		else

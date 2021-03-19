@@ -6,28 +6,28 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/17 18:33:29 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:53:24 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	map_parse(char **line, int j)
+int	map_parse(char **line, int j, int fd)
 {
-	int	i;
+	int		i;
+	char	*newl;
 
 	i = 0;
-	while (line[i][j])
+	newl = ft_strjoin((*line), "F");
+	while (1)
 	{
-		if (j == 0 || !line[i][j + 1])
-		{
-			while (line[i][j] == ' ' || line[i][j] == '1')
-			{
-				(*g_p.map)[j] = matrix_realloc(line, j);
-				i++;
-			}
-		}
+		i = get_next_line(fd, line);
+		newl = ft_strjoin(newl, (*line));
+		newl = ft_strjoin(newl, "F");
+		if (i <= 0)
+			break ;
 	}
-	printf("|%s\n|", g_p.map[j]);
+	g_p.map = ft_split(newl, 'F');
+	free(newl);
 	return (1);
 }
