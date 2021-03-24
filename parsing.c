@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/19 16:40:52 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:08:43 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,15 @@ int		parsing(char **line, int j, int fd)
 {
 	int	ret;
 
+	ret = -1;
 	if (ft_isdigit((*line)[0]) == 0)
 	{
 		if ((*line)[0] == 'R')
 			ret = res_parse(line);
 		else if ((*line)[1] == ' ' && (*line)[2] != ' ')
-			ret = parse_sfc(line);
+			ret = (ft_isdigit((*line)[2]) == 1 ? parse_sfc(line) : parse_tx(line));
 		else if ((*line)[1] == 'O' || (*line)[1] == 'E' || (*line)[1] == 'A')
-			ret = parse_wall(line);
+			ret = (ft_isdigit((*line)[3]) == 1 ? parse_wall(line) : parse_tx(line));
 		else if ((*line)[0] == ' ' || (*line)[0] == '1')
 		{
 			j++;

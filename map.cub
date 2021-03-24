@@ -1,8 +1,8 @@
 R 1920 1080
-NO 150,0,30 
-SO 125,12,32
-WE 108,20,10
-EA 200,50,0
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
 
 S 0,30,250
 F 220,100,0

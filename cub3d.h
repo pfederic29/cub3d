@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/19 16:37:42 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:14:09 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ typedef	struct	s_parse
 	int		sky[3];
 	int		floor[3];
 	int		ceiling[3];
+	char	*wall[4];
+	char	*sfc[3];
+	int		nswe[4];
+	int		sfc[3];
 	char	**map;
 	char	reference[8];
 }				t_parse;
@@ -65,14 +69,16 @@ size_t			ft_strclen(char *s, char c);
 char			**ft_split(char *s, char c);
 size_t			ft_strlcat(char *dst, char *src, size_t dstsize);
 /*
-** parsing
+** parsing [FULL]
 */
 int				parsing(char **line, int j, int fd);
 int				res_parse(char **line);
 void			rgb_parse(char **line, int rgb[3]);
+int				parse_wall(char **line);
+int				parse_sfc(char **line);
 /*
 ** map_parsing
 */
 int				map_parse(char **line, int j, int fd);
-
+int				parse_tx(char **line);
 #endif
