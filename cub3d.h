@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/24 15:14:09 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:36:56 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ typedef	struct	s_parse
 	int		ceiling[3];
 	char	*wall[4];
 	char	*sfc[3];
-	int		nswe[4];
-	int		sfc[3];
 	char	**map;
 	char	reference[8];
+	int		map_h;
 }				t_parse;
 t_parse			g_p;
 /*

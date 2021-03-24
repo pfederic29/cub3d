@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/24 15:09:54 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:44:05 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,27 @@
 int	map_parse(char **line, int j, int fd)
 {
 	int		i;
+	int		y;
 	char	*newl;
 
 	i = 0;
-	newl = ft_strjoin((*line), "F");
+	y = 0;
+	newl = ft_strjoin((*line), "X");
 	while (1)
 	{
 		i = get_next_line(fd, line);
 		newl = ft_strjoin(newl, (*line));
-		newl = ft_strjoin(newl, "F");
+		newl = ft_strjoin(newl, "X");
 		if (i <= 0)
 			break ;
 	}
-	g_p.map = ft_split(newl, 'F');
+	while (newl[y])
+	{
+		if (newl[y] == 'X')
+			g_p.map_h++;
+		y++;
+	}
+	g_p.map = ft_split(newl, 'X');
 	free(newl);
 	return (1);
 }
@@ -66,6 +74,5 @@ int		parse_tx(char **line)
 		g_p.wall[2] = w_tx(line);
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
 		g_p.wall[3] = w_tx(line);
-	printf("|debug:\nN:|%s|\nS:|%s|\nW:|%s|\nE:|%s|\n", g_p.wall[0], g_p.wall[1], g_p.wall[2], g_p.wall[3]);
 	return (1);
 }
