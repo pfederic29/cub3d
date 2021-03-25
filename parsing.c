@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 10:57:54 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 15:41:38 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,30 @@ int		parse_wall(char **line)
 int		res_parse(char **line)
 {
 	int i;
-	int	h;
-
-	h = 0;
-	i = 0;
-	while (line[i])
+	
+	i = 1;
+	while ((*line)[i])
 	{
-		if (h == 1)
-			while (ft_isdigit((*line)[i]) == 1)
-			{
-				g_p.res_w = g_p.res_w * 10 + ((int)(*line)[i] - 48);
-				i++;
-			}
-		else if (h == 2 && ft_isdigit((*line)[i]) == 1)
-			while (ft_isdigit((*line)[i]) == 1)
-			{
-				g_p.res_h = g_p.res_h * 10 + ((int)(*line)[i] - 48);
-				i++;
-			}
-		if ((*line)[i] == ' ')
-			h++;
-		i++;
+		while ((*line)[i] == ' ')
+			i++;
+		while (ft_isdigit((*line)[i]))
+		{
+			g_p.res_w = g_p.res_w * 10 + ((int)(*line)[i] - 48);
+			i++;
+		}
+		while ((*line)[i] == ' ')
+			i++;
+		while (ft_isdigit((*line)[i]) == 1)
+		{
+			g_p.res_h = g_p.res_h * 10 + ((int)(*line)[i] - 48);
+			i++;
+		}
+		while ((*line)[i] == ' ')
+			i++;
+		if ((*line)[i++])
+			g_check.err = -1;
 	}
-	return (1);
+	return (g_check.err);
 }
 
 void	rgb_parse(char **line, int rgb[3])
@@ -115,12 +116,12 @@ void	rgb_parse(char **line, int rgb[3])
 	}
 }
 
-int		parsing(char **line, int j, int fd)
+int		parsing(char **line, int fd)
 {
 	int	ret;
 
 	ret = -1;
-	if (ft_isdigit((*line)[0]) == 0)
+	if (ft_isdigit((*line)[0]) == 0 || (*line)[0] == '1')
 	{
 		if ((*line)[0] == 'R')
 			ret = res_parse(line);
@@ -129,10 +130,7 @@ int		parsing(char **line, int j, int fd)
 		else if ((*line)[1] == 'O' || (*line)[1] == 'E' || (*line)[1] == 'A')
 			ret = (ft_isdigit((*line)[3]) == 1 ? parse_wall(line) : parse_tx(line));
 		else if ((*line)[0] == ' ' || (*line)[0] == '1')
-		{
-			j++;
-			return (map_parse(line, j, fd));
-		}
+			return (map_parse(line, fd));
 		else if (!*line[0])
 			return (1);
 		else

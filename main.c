@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 12:44:06 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 14:29:14 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,20 @@ int		main(void)
 
 	fd_map = open("map.cub", O_RDONLY);
 	i = 1;
-	j = -1;
 	struct_init();
 	while (i)
 	{
 		i = get_next_line(fd_map, line);
 		if (i == 1)
-			i = parsing(line, j, fd_map);
+			i = parsing(line, fd_map);
 		else if (i == -1 || g_check.err == -1)
 			write(1, "Error!\n", 7);
 	}
 /*
 ** DEBUG : controllo parsing
 */
-	printf("\nAllowed Chars in Map: |%s|\n", g_p.reference);
+	printf("\n|W : %d| |H : %d|\n", g_p.res_w, g_p.res_h);
+	/*printf("\nAllowed Chars in Map: |%s|\n", g_p.reference);
 	printf("\n|Map Heigth: %d|\n", g_p.map_h);
 	printf("|debug:\nN:|%s|\nS:|%s|\nW:|%s|\nE:|%s|\n", g_p.wall[0], g_p.wall[1], g_p.wall[2], g_p.wall[3]);
 	printf("|debug:\nS:|%s|\nF:|%s|\nC:|%s|\n", g_p.sfc[0], g_p.sfc[1], g_p.sfc[2]);
@@ -105,6 +105,6 @@ int		main(void)
 	{
 		printf("|%s|\n", g_p.map[q]);
 		q++;
-	}
+	}*/
 	return (0);
 }

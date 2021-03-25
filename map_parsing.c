@@ -6,13 +6,13 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 12:30:32 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:59:13 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	map_parse(char **line, int j, int fd)
+int	map_parse(char **line, int fd)
 {
 	int		i;
 	int		y;
@@ -24,6 +24,8 @@ int	map_parse(char **line, int j, int fd)
 	while (1)
 	{
 		i = get_next_line(fd, line);
+		if (!(*line)[0])
+			break ;
 		newl = ft_strjoin(newl, (*line));
 		newl = ft_strjoin(newl, "X");
 		if (i <= 0)
