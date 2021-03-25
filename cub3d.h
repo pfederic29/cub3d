@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/24 15:36:56 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:30:32 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ typedef	struct	s_parse
 	int		map_h;
 }				t_parse;
 t_parse			g_p;
+
+typedef struct	s_checker
+{
+	int		r;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		s;
+	int		f;
+	int		c;
+	int		err;
+}				t_checker;
+t_checker		g_check;
 /*
 ** functions
 */

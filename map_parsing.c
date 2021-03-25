@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 10:05:07 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:30:32 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	map_parse(char **line, int j, int fd)
 	}
 	g_p.map = ft_split(newl, 'X');
 	free(newl);
-	return (1);
+	return (g_check.err);
 }
 
 char	*w_tx(char **line)
@@ -64,21 +64,53 @@ char	*w_tx(char **line)
 	return (nwline);
 }
 
+int	sfc_tx(char **line)
+{
+	if ((*line)[0] == 'S' && g_check.s == 0)
+	{
+		g_p.sfc[0] = w_tx(line);
+		g_check.s = 1;
+	}
+	else if ((*line)[0] == 'F'&& g_check.f == 0)
+	{
+		g_p.sfc[1] = w_tx(line);
+		g_check.f = 1;
+	}
+	else if ((*line)[0] == 'C' && g_check.c == 0)
+	{
+		g_p.sfc[2] = w_tx(line);
+		g_check.c = 1;
+	}
+	else
+		g_check.err = -1;
+	return (g_check.err);
+}
+
 int		parse_tx(char **line)
 {
-	if ((*line)[0] == 'N' && (*line)[1] == 'O')
+	if ((*line)[0] == 'N' && (*line)[1] == 'O' && g_check.no == 0)
+	{
 		g_p.wall[0] = w_tx(line);
-	else if ((*line)[0] == 'S' && (*line)[1] == 'O')
+		g_check.no = 1;
+	}
+	else if ((*line)[0] == 'S' && (*line)[1] == 'O' && g_check.so == 0)
+	{
 		g_p.wall[1] = w_tx(line);
-	else if ((*line)[0] == 'W' && (*line)[1] == 'E')
+		g_check.so = 1;
+	}
+	else if ((*line)[0] == 'W' && (*line)[1] == 'E' && g_check.we == 0)
+	{
 		g_p.wall[2] = w_tx(line);
-	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
+		g_check.we = 1;
+	}
+	else if ((*line)[0] == 'E' && (*line)[1] == 'A' && g_check.ea == 0)
+	{
 		g_p.wall[3] = w_tx(line);
-	else if ((*line)[0] == 'S' && (*line)[1] == ' ')
-		g_p.sfc[0] = w_tx(line);
-	else if ((*line)[0] == 'F' && (*line)[1] == ' ')
-		g_p.sfc[1] = w_tx(line);
-	else if ((*line)[0] == 'C' && (*line)[1] == ' ')
-		g_p.sfc[2] = w_tx(line);
-	return (1);
+		g_check.ea = 1;
+	}
+	else if ((*line)[1] == ' ')
+		g_check.err = sfc_tx(line);
+	else
+		g_check.err = -1;
+	return (g_check.err);
 }

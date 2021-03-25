@@ -6,11 +6,25 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 10:07:58 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:44:06 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_init(void)
+{
+	g_check.r = 0;
+	g_check.no = 0;
+	g_check.so = 0;
+	g_check.we = 0;
+	g_check.ea = 0;
+	g_check.s = 0;
+	g_check.f = 0;
+	g_check.c = 0;
+	g_check.err = 1;
+	
+}
 
 void	ref_init(void)
 {
@@ -56,6 +70,7 @@ void	struct_init(void)
 	g_p.ceiling[1] = 0;
 	g_p.ceiling[2] = 0;
 	ref_init();
+	check_init();
 }
 
 int		main(void)
@@ -76,7 +91,7 @@ int		main(void)
 		i = get_next_line(fd_map, line);
 		if (i == 1)
 			i = parsing(line, j, fd_map);
-		else if (i == -1)
+		else if (i == -1 || g_check.err == -1)
 			write(1, "Error!\n", 7);
 	}
 /*
