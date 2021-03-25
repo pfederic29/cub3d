@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/24 15:44:05 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/25 10:05:07 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,11 @@ int		parse_tx(char **line)
 		g_p.wall[2] = w_tx(line);
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
 		g_p.wall[3] = w_tx(line);
+	else if ((*line)[0] == 'S' && (*line)[1] == ' ')
+		g_p.sfc[0] = w_tx(line);
+	else if ((*line)[0] == 'F' && (*line)[1] == ' ')
+		g_p.sfc[1] = w_tx(line);
+	else if ((*line)[0] == 'C' && (*line)[1] == ' ')
+		g_p.sfc[2] = w_tx(line);
 	return (1);
 }
