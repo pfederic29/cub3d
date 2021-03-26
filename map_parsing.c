@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 11:31:40 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 18:38:07 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ int	map_parse(char **line, int fd)
 	int		y;
 	char	*newl;
 
-	i = 0;
+	i = 1;
 	y = 0;
 	newl = ft_strjoin((*line), "X");
-	while (1)
+	while (i > 0)
 	{
 		i = get_next_line(fd, line);
 		newl = ft_strjoin(newl, (*line));
 		newl = ft_strjoin(newl, "X");
-		if (i <= 0)
-			break ;
 	}
 	
 	g_p.map = ft_split(newl, 'X');
@@ -40,15 +38,15 @@ int	map_parse(char **line, int fd)
 	return (g_check.err);
 }
 
-char	*w_tx(char **line)
+char	*wall_store(char **line)
 {
 	int		i;
 	int		j;
 	char	*nwline;
 
-	i = 0;
+	i = 2;
 	j = 0;
-	while ((*line)[i] != '.')
+	while ((*line)[i] == ' ' && (*line)[i] != '.')
 		i++;
 	if ((*line)[i] == 0)
 		return (0);
@@ -56,7 +54,31 @@ char	*w_tx(char **line)
 	{
 		if (!(nwline = malloc(ft_strlen(*line + i) + 1)))
 			return (0);
-		while ((*line)[i])
+		while ((*line)[i] && (*line)[i] != ' ')
+			nwline[j++] = (*line)[i++];
+		nwline[j] = 0;
+		free(*line);
+	}
+	return (nwline);
+}
+
+char	*sfc_store(char **line)
+{
+	int		i;
+	int		j;
+	char	*nwline;
+
+	i = 1;
+	j = 0;
+	while ((*line)[i] == ' ' && (*line)[i] != '.')
+		i++;
+	if ((*line)[i] == 0)
+		return (0);
+	else
+	{
+		if (!(nwline = malloc(ft_strlen(*line + i) + 1)))
+			return (0);
+		while ((*line)[i] && (*line)[i] != ' ')
 			nwline[j++] = (*line)[i++];
 		nwline[j] = 0;
 		free(*line);
@@ -68,17 +90,17 @@ int	sfc_tx(char **line)
 {
 	if ((*line)[0] == 'S' && g_check.s == 0)
 	{
-		g_p.sfc[0] = w_tx(line);
+		g_p.sfc[0] = sfc_store(line);
 		g_check.s = 1;
 	}
 	else if ((*line)[0] == 'F'&& g_check.f == 0)
 	{
-		g_p.sfc[1] = w_tx(line);
+		g_p.sfc[1] = sfc_store(line);
 		g_check.f = 1;
 	}
 	else if ((*line)[0] == 'C' && g_check.c == 0)
 	{
-		g_p.sfc[2] = w_tx(line);
+		g_p.sfc[2] = sfc_store(line);
 		g_check.c = 1;
 	}
 	else
@@ -90,22 +112,22 @@ int		parse_tx(char **line)
 {
 	if ((*line)[0] == 'N' && (*line)[1] == 'O' && g_check.no == 0)
 	{
-		g_p.wall[0] = w_tx(line);
+		g_p.wall[0] = wall_store(line);
 		g_check.no = 1;
 	}
 	else if ((*line)[0] == 'S' && (*line)[1] == 'O' && g_check.so == 0)
 	{
-		g_p.wall[1] = w_tx(line);
+		g_p.wall[1] = wall_store(line);
 		g_check.so = 1;
 	}
 	else if ((*line)[0] == 'W' && (*line)[1] == 'E' && g_check.we == 0)
 	{
-		g_p.wall[2] = w_tx(line);
+		g_p.wall[2] = wall_store(line);
 		g_check.we = 1;
 	}
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A' && g_check.ea == 0)
 	{
-		g_p.wall[3] = w_tx(line);
+		g_p.wall[3] = wall_store(line);
 		g_check.ea = 1;
 	}
 	else if ((*line)[1] == ' ')

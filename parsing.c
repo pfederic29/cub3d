@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 10:27:14 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 18:44:17 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,9 @@ int		parsing(char **line, int fd)
 	{
 		if ((*line)[0] == 'R')
 			ret = res_parse(line);
-		else if ((*line)[1] == ' ' && (*line)[2] != ' ')
-			ret = (ft_isdigit((*line)[2]) == 1 ? parse_sfc(line) : parse_tx(line));
-		else if ((*line)[1] == 'O' || (*line)[1] == 'E' || (*line)[1] == 'A')
+		else if (((*line)[0] == 'S' && (*line)[1] == ' ') || (*line)[0] == 'F' || (*line)[0] == 'C')
+			ret = (ft_isdigit((*line)[2]) == 1 ? parse_sfc(line) : sfc_tx(line));
+		else if ((*line)[0] == 'N' || (*line)[0] == 'S' || (*line)[0] == 'W' || (*line)[0] == 'E')
 			ret = (ft_isdigit((*line)[3]) == 1 ? parse_wall(line) : parse_tx(line));
 		else if ((*line)[0] == ' ' || (*line)[0] == '1')
 			return (map_parse(line, fd));

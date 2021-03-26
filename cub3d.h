@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 11:27:52 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 18:28:21 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,13 @@ void			rgb_parse(char **line, int rgb[3]);
 int				parse_wall(char **line);
 int				parse_sfc(char **line);
 /*
-** map_parsing
+** map_parsing [FULL]
 */
 int				map_parse(char **line, int fd);
+char			*wall_store(char **line);
+char			*sfc_store(char **line);
 int				parse_tx(char **line);
+int				sfc_tx(char **line);
 /*
 ** checker
 */
