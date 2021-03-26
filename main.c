@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 11:26:02 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 16:53:13 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		main(void)
 ** DEBUG : controllo parsing
 */
 	printf("\n|W : %d| |H : %d|\n", g_p.res_w, g_p.res_h);
-	/*printf("\nAllowed Chars in Map: |%s|\n", g_p.reference);
+	printf("\nAllowed Chars in Map: |%s|\n", g_p.reference);
 	printf("\n|Map Heigth: %d|\n", g_p.map_h);
 	printf("|debug:\nN:|%s|\nS:|%s|\nW:|%s|\nE:|%s|\n", g_p.wall[0], g_p.wall[1], g_p.wall[2], g_p.wall[3]);
 	printf("|debug:\nS:|%s|\nF:|%s|\nC:|%s|\n", g_p.sfc[0], g_p.sfc[1], g_p.sfc[2]);
@@ -105,6 +105,6 @@ int		main(void)
 	{
 		printf("|%s|\n", g_p.map[q]);
 		q++;
-	}*/
+	}
 	return (0);
 }
