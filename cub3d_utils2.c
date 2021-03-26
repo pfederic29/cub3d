@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:27:00 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/19 16:57:03 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:26:20 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	**ft_split(char *s, char c)
 			ft_strlcpy(arr[i], s, len + 1);
 			s += len;
 			i++;
+			g_p.map_h++;
 		}
 		else
 			s++;

@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 15:41:38 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 10:27:14 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,6 @@ int		parsing(char **line, int fd)
 		else
 			return (-1);
 	}
+	//ret = check_val();
 	return (ret);
 }

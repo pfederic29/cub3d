@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 16:59:13 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:31:40 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,18 @@ int	map_parse(char **line, int fd)
 	while (1)
 	{
 		i = get_next_line(fd, line);
-		if (!(*line)[0])
-			break ;
 		newl = ft_strjoin(newl, (*line));
 		newl = ft_strjoin(newl, "X");
 		if (i <= 0)
 			break ;
 	}
-	while (newl[y])
-	{
-		if (newl[y] == 'X')
-			g_p.map_h++;
-		y++;
-	}
+	
 	g_p.map = ft_split(newl, 'X');
+	if (check_rows(newl) == -1)
+	{
+		g_check.err = -1;
+        printf("Invalid Map");
+	}
 	free(newl);
 	return (g_check.err);
 }

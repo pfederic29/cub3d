@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/25 14:12:35 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:27:52 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,10 @@ int				parse_sfc(char **line);
 */
 int				map_parse(char **line, int fd);
 int				parse_tx(char **line);
+/*
+** checker
+*/
+int				check_val(void);
+int				check_res(void);
+int 			check_rows(char *newl);
 #endif
