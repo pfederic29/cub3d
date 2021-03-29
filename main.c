@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 11:30:07 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 12:37:30 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,20 @@ void	struct_init(void)
 
 int		main(void)
 {
-	char	**line;
+	char	*line;
 	int		fd_map;
 	int		val;
-	int		j;
 	int	q = 0;
-	int		rd;
 
 	fd_map = open("map.cub", O_RDONLY);
 	val = 1;
 	struct_init();
 	while (val)
 	{
-		val = get_next_line(fd_map, line);
+		val = get_next_line(fd_map, &line);
 		if (val == 1)
 		{
-			g_check.err = parsing(line, fd_map);
+			g_check.err = parsing(&line, fd_map);
 			if (g_check.err == -1)
 				write(1, "Parse Error!\n", 13);
 		}

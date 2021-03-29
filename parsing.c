@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 11:53:08 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 12:13:39 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		parse_sfc(char **line)
 	{
 		g_check.err = rgb_parse(line, g_p.ceiling);
 		if (g_p.ceiling[0] > 255 || g_p.ceiling[1] > 255 ||\
-		 g_p.ceiling[2] > 255 || g_check.err == -1)
+		g_p.ceiling[2] > 255 || g_check.err == -1)
 			return (-1);
 	}
 	else
@@ -114,7 +114,8 @@ int	rgb_parse(char **line, int rgb[3])
 		}
 		if ((*line)[i] == ',')
 			h++;
-		else if (i > 1 && ft_isdigit((*line)[i]) == 0 && (*line)[i] != ' ')
+		else if (i > 1 && ft_isdigit((*line)[i]) == 0 &&\
+		(*line)[i] != ' ' && (*line)[i])
 			return (-1);
 		i++;
 	}
