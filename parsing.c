@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 18:44:17 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 10:12:48 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,16 +119,27 @@ void	rgb_parse(char **line, int rgb[3])
 int		parsing(char **line, int fd)
 {
 	int	ret;
+	int	i;
 
 	ret = -1;
+	i = 1;
 	if (ft_isdigit((*line)[0]) == 0 || (*line)[0] == '1')
 	{
 		if ((*line)[0] == 'R')
 			ret = res_parse(line);
 		else if (((*line)[0] == 'S' && (*line)[1] == ' ') || (*line)[0] == 'F' || (*line)[0] == 'C')
-			ret = (ft_isdigit((*line)[2]) == 1 ? parse_sfc(line) : sfc_tx(line));
+		{
+			while ((*line)[i] == ' ')
+				i++;
+			ret = (ft_isdigit((*line)[i]) == 1 ? parse_sfc(line) : sfc_tx(line));
+		}
 		else if ((*line)[0] == 'N' || (*line)[0] == 'S' || (*line)[0] == 'W' || (*line)[0] == 'E')
-			ret = (ft_isdigit((*line)[3]) == 1 ? parse_wall(line) : parse_tx(line));
+		{
+			i = 2;
+			while ((*line)[i] == ' ')
+				i++;
+			ret = (ft_isdigit((*line)[i]) == 1 ? parse_wall(line) : parse_tx(line));
+		}
 		else if ((*line)[0] == ' ' || (*line)[0] == '1')
 			return (map_parse(line, fd));
 		else if (!*line[0])
