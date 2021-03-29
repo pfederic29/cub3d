@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 12:13:39 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:31:01 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,29 +124,37 @@ int	rgb_parse(char **line, int rgb[3])
 
 int		parsing(char **line, int fd)
 {
-	int	ret;
-	int	i;
+	int		ret;
+	int		i;
+	int		j;
 
 	ret = -1;
-	i = 1;
+	i = 0;
+	j = 0;
+	while ((*line)[i] == ' ')
+				i++;
 	if (ft_isdigit((*line)[0]) == 0 || (*line)[0] == '1')
 	{
-		if ((*line)[0] == 'R')
+		if ((*line)[i] == 'R')
 			ret = res_parse(line);
-		else if (((*line)[0] == 'S' && (*line)[1] == ' ') || (*line)[0] == 'F' || (*line)[0] == 'C')
+		else if (((*line)[i] == 'S' && (*line)[i + 1] == ' ') || (*line)[i] == 'F' || (*line)[i] == 'C')
 		{
+			j = i;
+			i ++;
 			while ((*line)[i] == ' ')
 				i++;
-			ret = (ft_isdigit((*line)[i]) == 1 ? parse_sfc(line) : sfc_tx(line));
+			ret = (ft_isdigit((*line)[i]) == 1 ? parse_sfc(line) : sfc_tx(line, j));
 		}
-		else if ((*line)[0] == 'N' || (*line)[0] == 'S' || (*line)[0] == 'W' || (*line)[0] == 'E')
+		else if (((*line)[i] == 'N' && (*line)[i + 1] == 'O') || ((*line)[i] == 'S' && (*line)[i + 1] == 'O') ||\
+		((*line)[i] == 'W' && (*line)[i + 1] == 'E') || ((*line)[i] == 'E' && (*line)[i + 1] == 'A'))
 		{
-			i = 2;
+			j = i;
+			i += 2;
 			while ((*line)[i] == ' ')
 				i++;
-			ret = (ft_isdigit((*line)[i]) == 1 ? parse_wall(line) : parse_tx(line));
+			ret = (ft_isdigit((*line)[i]) == 1 ? parse_wall(line) : parse_tx(line, j));
 		}
-		else if ((*line)[0] == ' ' || (*line)[0] == '1')
+		else if ((*line)[i] == '1')
 			return (map_parse(line, fd));
 		else if (!*line[0])
 			return (1);

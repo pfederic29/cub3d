@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 12:37:30 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:03:45 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,18 @@ void	struct_init(void)
 	check_init();
 }
 
-int		main(void)
+int		main(int argc, const char **argv)
 {
 	char	*line;
 	int		fd_map;
 	int		val;
 	int	q = 0;
 
+	//if (argc != 2 && argc != 3)
+	//{
+	//	write(1, "Error\n", 6);
+	//	return (0);
+	//}
 	fd_map = open("map.cub", O_RDONLY);
 	val = 1;
 	struct_init();
@@ -91,14 +96,13 @@ int		main(void)
 		{
 			g_check.err = parsing(&line, fd_map);
 			if (g_check.err == -1)
-				write(1, "Parse Error!\n", 13);
+				write(1, "Error\n", 6);
 		}
 		else if (val == -1)
-			write(1, "Read Error!\n", 12);
+			write(1, "Error\n", 6);
 	}
 /*
 ** DEBUG : controllo parsing
-*/
 	printf("\n|W : %d| |H : %d|\n", g_p.res_w, g_p.res_h);
 	printf("\nAllowed Chars in Map: |%s|\n", g_p.reference);
 	printf("\n|Map Heigth: %d|\n", g_p.map_h);
@@ -106,9 +110,10 @@ int		main(void)
 	printf("debug:\n|S:|%s|\n", g_p.sfc[0]);
 	printf("|F:|%d||%d||%d|\n", g_p.floor[0], g_p.floor[1], g_p.floor[2]);
 	printf("|C:|%d||%d||%d|\n", g_p.ceiling[0], g_p.ceiling[1], g_p.ceiling[2]);
+*/
 	while (g_p.map[q] != 0)
 	{
-		printf("|%s|\n", g_p.map[q]);
+		printf("%s\n", g_p.map[q]);
 		q++;
 	}
 	return (0);

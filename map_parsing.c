@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 11:04:42 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:29:56 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,19 @@ char	*sfc_store(char **line)
 	return (nwline);
 }
 
-int	sfc_tx(char **line)
+int	sfc_tx(char **line, int j)
 {
-	if ((*line)[0] == 'S' && g_check.s == 0)
+	if ((*line)[j] == 'S' && g_check.s == 0)
 	{
 		g_p.sfc[0] = sfc_store(line);
 		g_check.s = 1;
 	}
-	else if ((*line)[0] == 'F'&& g_check.f == 0)
+	else if ((*line)[j] == 'F'&& g_check.f == 0)
 	{
 		g_p.sfc[1] = sfc_store(line);
 		g_check.f = 1;
 	}
-	else if ((*line)[0] == 'C' && g_check.c == 0)
+	else if ((*line)[j] == 'C' && g_check.c == 0)
 	{
 		g_p.sfc[2] = sfc_store(line);
 		g_check.c = 1;
@@ -108,30 +108,30 @@ int	sfc_tx(char **line)
 	return (g_check.err);
 }
 
-int		parse_tx(char **line)
+int		parse_tx(char **line, int j)
 {
-	if ((*line)[0] == 'N' && (*line)[1] == 'O' && g_check.no == 0)
+	if ((*line)[j] == 'N' && (*line)[j + 1] == 'O' && g_check.no == 0)
 	{
 		g_p.wall[0] = wall_store(line);
 		g_check.no = 1;
 	}
-	else if ((*line)[0] == 'S' && (*line)[1] == 'O' && g_check.so == 0)
+	else if ((*line)[j] == 'S' && (*line)[j + 1] == 'O' && g_check.so == 0)
 	{
 		g_p.wall[1] = wall_store(line);
 		g_check.so = 1;
 	}
-	else if ((*line)[0] == 'W' && (*line)[1] == 'E' && g_check.we == 0)
+	else if ((*line)[j] == 'W' && (*line)[j + 1] == 'E' && g_check.we == 0)
 	{
 		g_p.wall[2] = wall_store(line);
 		g_check.we = 1;
 	}
-	else if ((*line)[0] == 'E' && (*line)[1] == 'A' && g_check.ea == 0)
+	else if ((*line)[j] == 'E' && (*line)[j + 1] == 'A' && g_check.ea == 0)
 	{
 		g_p.wall[3] = wall_store(line);
 		g_check.ea = 1;
 	}
 	else if ((*line)[1] == ' ')
-		g_check.err = sfc_tx(line);
+		g_check.err = sfc_tx(line, j);
 	else
 		g_check.err = -1;
 	return (g_check.err);

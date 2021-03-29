@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 11:23:19 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:29:17 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ size_t			ft_strlcat(char *dst, char *src, size_t dstsize);
 */
 int				parsing(char **line, int fd);// 31 lines
 int				res_parse(char **line);
-int			rgb_parse(char **line, int rgb[3]);
+int				rgb_parse(char **line, int rgb[3]);
 int				parse_wall(char **line);
 int				parse_sfc(char **line);
 /*
@@ -96,8 +96,8 @@ int				parse_sfc(char **line);
 int				map_parse(char **line, int fd);
 char			*wall_store(char **line);
 char			*sfc_store(char **line);
-int				parse_tx(char **line);
-int				sfc_tx(char **line);
+int				parse_tx(char **line, int j);
+int				sfc_tx(char **line, int j);
 /*
 ** checker
 */
