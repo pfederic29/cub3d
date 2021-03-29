@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 18:28:21 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 11:23:19 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef	struct	s_parse
 	char	*sfc[3];
 	char	**map;
 	char	reference[8];
+	int		spawn;
 	int		map_h;
 }				t_parse;
 t_parse			g_p;
@@ -84,9 +85,9 @@ size_t			ft_strlcat(char *dst, char *src, size_t dstsize);
 /*
 ** parsing [FULL]
 */
-int				parsing(char **line, int fd);
+int				parsing(char **line, int fd);// 31 lines
 int				res_parse(char **line);
-void			rgb_parse(char **line, int rgb[3]);
+int			rgb_parse(char **line, int rgb[3]);
 int				parse_wall(char **line);
 int				parse_sfc(char **line);
 /*
@@ -103,4 +104,12 @@ int				sfc_tx(char **line);
 int				check_val(void);
 int				check_res(void);
 int 			check_rows(char *newl);
+/*
+** checker2
+*/
+int 			check_updown(char *first, char *last);
+int 			check_edges(char **map, int y);// 35 lines
+int 			check_line(char **map, int y);
+int 			check_map(char **map);
+
 #endif

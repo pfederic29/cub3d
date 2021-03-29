@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 10:00:51 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 11:30:07 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	ref_init(void)
 	g_p.reference[5] = 'S';
 	g_p.reference[6] = 'E';
 	g_p.reference[7] = 'W';
-	g_p.map_h = 0;
+	g_p.map_h = -1;
+	g_p.spawn = 0;
 }
 
 void	struct_init(void)
@@ -89,9 +90,13 @@ int		main(void)
 	{
 		val = get_next_line(fd_map, line);
 		if (val == 1)
-			val = parsing(line, fd_map);
-		else if (val == -1 || g_check.err == -1)
-			write(1, "Error!\n", 7);
+		{
+			g_check.err = parsing(line, fd_map);
+			if (g_check.err == -1)
+				write(1, "Parse Error!\n", 13);
+		}
+		else if (val == -1)
+			write(1, "Read Error!\n", 12);
 	}
 /*
 ** DEBUG : controllo parsing

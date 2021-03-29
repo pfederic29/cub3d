@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 14:36:05 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 10:12:48 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 11:53:08 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,53 +16,55 @@ int		parse_sfc(char **line)
 {
 	if ((*line)[0] == 'S')
 	{
-		rgb_parse(line, g_p.sky);
-		if (g_p.sky[0] > 255 || g_p.sky[1] > 255 || g_p.sky[2] > 255)
+		g_check.err = rgb_parse(line, g_p.sky);
+		if (g_p.sky[0] > 255 || g_p.sky[1] > 255 ||\
+		g_p.sky[2] > 255 || g_check.err == -1)
 			return (-1);
 	}
 	else if ((*line)[0] == 'F')
 	{
-		rgb_parse(line, g_p.floor);
-		if (g_p.floor[0] > 255 || g_p.floor[1] > 255 || g_p.floor[2] > 255)
+		g_check.err = rgb_parse(line, g_p.floor);
+		if (g_p.floor[0] > 255 || g_p.floor[1] > 255 ||\
+		g_p.floor[2] > 255 || g_check.err == -1)
 			return (-1);
 	}
 	else if ((*line)[0] == 'C')
 	{
-		rgb_parse(line, g_p.ceiling);
-		if (g_p.ceiling[0] > 255 || \
-		g_p.ceiling[1] > 255 || g_p.ceiling[2] > 255)
+		g_check.err = rgb_parse(line, g_p.ceiling);
+		if (g_p.ceiling[0] > 255 || g_p.ceiling[1] > 255 ||\
+		 g_p.ceiling[2] > 255 || g_check.err == -1)
 			return (-1);
 	}
 	else
 		return (-1);
-	return (1);
+	return (g_check.err);
 }
 
 int		parse_wall(char **line)
 {
 	if ((*line)[0] == 'N' && (*line)[1] == 'O')
 	{
-		rgb_parse(line, g_p.n_wall);
+		g_check.err = rgb_parse(line, g_p.n_wall);
 		return ((g_p.n_wall[0] > 255 || g_p.n_wall[1] > 255 ||\
-		g_p.n_wall[2] > 255) ? -1 : 1);
+		g_p.n_wall[2] > 255 || g_check.err == -1) ? -1 : 1);
 	}
 	else if ((*line)[0] == 'S' && (*line)[1] == 'O')
 	{
-		rgb_parse(line, g_p.s_wall);
+		g_check.err = rgb_parse(line, g_p.s_wall);
 		return ((g_p.s_wall[0] > 255 || g_p.s_wall[1] > 255 ||\
-		g_p.s_wall[2] > 255) ? -1 : 1);
+		g_p.s_wall[2] > 255 || g_check.err == -1) ? -1 : 1);
 	}
 	else if ((*line)[0] == 'W' && (*line)[1] == 'E')
 	{
-		rgb_parse(line, g_p.w_wall);
+		g_check.err = rgb_parse(line, g_p.w_wall);
 		return ((g_p.w_wall[0] > 255 || g_p.w_wall[1] > 255 ||\
-		g_p.w_wall[2] > 255) ? -1 : 1);
+		g_p.w_wall[2] > 255 || g_check.err == -1) ? -1 : 1);
 	}
 	else if ((*line)[0] == 'E' && (*line)[1] == 'A')
 	{
-		rgb_parse(line, g_p.e_wall);
+		g_check.err = rgb_parse(line, g_p.e_wall);
 		return ((g_p.e_wall[0] > 255 || g_p.e_wall[1] > 255 ||\
-		g_p.e_wall[2] > 255) ? -1 : 1);
+		g_p.e_wall[2] > 255 || g_check.err == -1) ? -1 : 1);
 	}
 	return (-1);
 }
@@ -96,7 +98,7 @@ int		res_parse(char **line)
 	return (g_check.err);
 }
 
-void	rgb_parse(char **line, int rgb[3])
+int	rgb_parse(char **line, int rgb[3])
 {
 	int i;
 	int	h;
@@ -112,8 +114,11 @@ void	rgb_parse(char **line, int rgb[3])
 		}
 		if ((*line)[i] == ',')
 			h++;
+		else if (i > 1 && ft_isdigit((*line)[i]) == 0 && (*line)[i] != ' ')
+			return (-1);
 		i++;
 	}
+	return (1);
 }
 
 int		parsing(char **line, int fd)

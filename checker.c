@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:32:17 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/26 11:27:33 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 11:07:54 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int check_rows(char *newl)
     {
         if (newl[y] == 'X')
             i++;
-        if (newl[y] == 'X' && newl[y + 1] == 'X' && i < g_p.map_h)
+        if (newl[y] == 'X' && newl[y + 1] == 'X' && i < g_p.map_h + 1)
             return (-1);
             y++;
     }
