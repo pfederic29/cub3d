@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:32:17 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 11:07:54 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 18:35:51 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,22 @@ int	check_res(void)
 	return (g_check.err);
 }
 
+int check_args(void)
+{
+    if (g_check.r != 1 || g_check.no != 1 || g_check.so != 1 || g_check.we != 1 ||\
+    g_check.ea != 1 || g_check.s != 1 || g_check.f != 1 || g_check.c != 1)
+        return (-1);
+    return (1);
+}
+
 int	check_val(void)
 {
-	g_check.err = check_res();
-	return (g_check.err);
+    int i;
+
+    i = 1;
+	i = check_res();
+    i = check_args();
+	return (i);
 }
 
 int check_rows(char *newl)

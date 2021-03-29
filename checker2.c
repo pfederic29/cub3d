@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:32:17 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 12:14:38 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/29 18:11:22 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int check_edges(char **map, int y)
         {
             if (map[y-1][x] != '1' && map[y-1][x] != ' ')
             {
-                printf("Map architecture problem [%c] row |%d| column |%d|\n", map[y - 1][x-1], y, x);
+                write(1, "Error\n", 6);
                 return (-1);
             }
             x++;
@@ -62,7 +62,7 @@ int check_edges(char **map, int y)
         {
             if (map[y][x] != '1' && map[y][x] != ' ')
             {
-                printf("Map architecture problem [\"%c\"] row |%d| column |%d|\n", map[y][x-1], y + 1, x);
+                write(1, "Error\n", 6);
                 return (-1);
             }
             x++;
@@ -84,7 +84,7 @@ int check_line(char **map, int y)
             g_p.spawn++;
         if (c != '1' && c != 'W' && c != 'E' && c != 'S' && c != 'N' && c != '2' && c != '0' && c != ' ')
         {
-            printf("Invalid character %c\n%s\n", c, map[y]);
+            write(1, "Error\n", 6);
             return (-1);
         }
         x++;
@@ -98,7 +98,7 @@ int check_map(char **map)
     int len;
     if (check_updown(map[0], map[g_p.map_h]) == -1)
     {
-        puts("Error in first or last row");
+        write(1, "Error\n", 6);
         return (-1);
     }
     while (i < g_p.map_h)
@@ -106,7 +106,7 @@ int check_map(char **map)
         len = ft_strlen(map[i]) - 1;
         if ((map[i][0] != '1' || map[i][len] != '1') && (map[i][0] != ' ' || map[i][len] != ' '))
         {
-            puts("Invalid borders");
+            write(1, "Error\n", 6);
             return (-1);
         }
         i++;
@@ -119,7 +119,7 @@ int check_map(char **map)
     }
     if (g_p.spawn != 1)
     {
-        puts("Spawn is invalid");
+        write(1, "Error\n", 6);
         return (-1);
     }
    return (1);
