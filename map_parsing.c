@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 14:28:34 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/30 11:36:39 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:34:35 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	map_parse(char **line, int fd)
 		write(1, "Error\n", 6);
 		g_check.err = -1;;
 	}
+	else
+		g_check.mp = 1;
 	free(newl);
 	return (g_check.err);
 }

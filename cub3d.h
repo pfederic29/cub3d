@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 10:46:55 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 16:11:52 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:33:15 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct	s_checker
 	int		s;
 	int		f;
 	int		c;
+	int		mp;
 	int		err;
 }				t_checker;
 t_checker		g_check;

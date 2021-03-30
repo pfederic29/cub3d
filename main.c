@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/30 13:30:27 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:37:33 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	check_init(void)
 	g_check.s = 0;
 	g_check.f = 0;
 	g_check.c = 0;
+	g_check.mp = 0;
 	g_check.err = 1;
 	
 }
@@ -86,7 +87,7 @@ int		main(int argc, const char **argv)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	fd_map = open("map.cub", O_RDONLY);
+	fd_map = open(argv[1], O_RDONLY);
 	val = 1;
 	struct_init();
 	while (val)
