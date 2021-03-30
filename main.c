@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/30 11:54:10 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:30:27 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ int		main(int argc, const char **argv)
 	char	*line;
 	int		fd_map;
 	int		val;
-	int		q = 0;
+	//int		q = 0;
 	
 	if (argc != 2 && argc != 3)
 	{
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	fd_map = open(argv[1], O_RDONLY);
+	fd_map = open("map.cub", O_RDONLY);
 	val = 1;
 	struct_init();
 	while (val)
@@ -102,10 +102,10 @@ int		main(int argc, const char **argv)
 	g_check.err = check_val();
 	if (g_check.err == -1)
 				write(1, "Error\n", 6);
-	while (g_p.map[q] != 0)
-	{
-		printf("%s\n", g_p.map[q]);
-		q++;
-	}
+	//while (g_p.map[q] != 0)
+	//{
+	//	printf("%s\n", g_p.map[q]);
+	//	q++;
+	//}
 	return (0);
 }
