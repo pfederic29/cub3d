@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 19:18:52 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 11:54:10 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,27 @@ void	struct_init(void)
 {
 	g_p.res_w = 0;
 	g_p.res_h = 0;
-	g_p.n_wall[0] = 0;
-	g_p.n_wall[1] = 0;
-	g_p.n_wall[2] = 0;
-	g_p.s_wall[0] = 0;
-	g_p.s_wall[1] = 0;
-	g_p.s_wall[2] = 0;
-	g_p.w_wall[0] = 0;
-	g_p.w_wall[1] = 0;
-	g_p.w_wall[2] = 0;
-	g_p.e_wall[0] = 0;
-	g_p.e_wall[1] = 0;
-	g_p.e_wall[2] = 0;
-	g_p.sky[0] = 0;
-	g_p.sky[1] = 0;
-	g_p.sky[2] = 0;
-	g_p.floor[0] = 0;
-	g_p.floor[1] = 0;
-	g_p.floor[2] = 0;
-	g_p.ceiling[0] = 0;
-	g_p.ceiling[1] = 0;
-	g_p.ceiling[2] = 0;
+	g_p.n_wall[0] = -1;
+	g_p.n_wall[1] = -1;
+	g_p.n_wall[2] = -1;
+	g_p.s_wall[0] = -1;
+	g_p.s_wall[1] = -1;
+	g_p.s_wall[2] = -1;
+	g_p.w_wall[0] = -1;
+	g_p.w_wall[1] = -1;
+	g_p.w_wall[2] = -1;
+	g_p.e_wall[0] = -1;
+	g_p.e_wall[1] = -1;
+	g_p.e_wall[2] = -1;
+	g_p.sky[0] = -1;
+	g_p.sky[1] = -1;
+	g_p.sky[2] = -1;
+	g_p.floor[0] = -1;
+	g_p.floor[1] = -1;
+	g_p.floor[2] = -1;
+	g_p.ceiling[0] = -1;
+	g_p.ceiling[1] = -1;
+	g_p.ceiling[2] = -1;
 	ref_init();
 	check_init();
 }
@@ -79,6 +79,7 @@ int		main(int argc, const char **argv)
 	char	*line;
 	int		fd_map;
 	int		val;
+	int		q = 0;
 	
 	if (argc != 2 && argc != 3)
 	{
@@ -101,5 +102,10 @@ int		main(int argc, const char **argv)
 	g_check.err = check_val();
 	if (g_check.err == -1)
 				write(1, "Error\n", 6);
+	while (g_p.map[q] != 0)
+	{
+		printf("%s\n", g_p.map[q]);
+		q++;
+	}
 	return (0);
 }

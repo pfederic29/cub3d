@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 15:32:17 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/29 18:35:51 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 12:08:00 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	check_res(void)
 {
 	if (g_p.res_w > 2147483647 || g_p.res_h > 2147483647)
-		g_check.err = -1;
-	return (g_check.err);
+		return (-1);
+    else if (g_p.res_w < g_p.res_h)
+        return (-1);
+	return (1);
 }
 
 int check_args(void)
@@ -27,12 +29,21 @@ int check_args(void)
     return (1);
 }
 
+int check_rgb(void)
+{
+    if (g_check.s == -1 || g_check.s == -1 || g_check.s == -1 ||\
+    g_check.no == -1 || g_check.so == -1 || g_check.we == -1 || g_check.ea == -1)
+        return (-1);
+    return (1);
+}
+
 int	check_val(void)
 {
     int i;
 
     i = 1;
 	i = check_res();
+    i = check_rgb();
     i = check_args();
 	return (i);
 }
