@@ -6,7 +6,7 @@
 /*   By: lmarzano <lmarzano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:36:02 by lmarzano          #+#    #+#             */
-/*   Updated: 2021/03/30 13:37:33 by lmarzano         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:39:12 by lmarzano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ int		main(int argc, const char **argv)
 	//	printf("%s\n", g_p.map[q]);
 	//	q++;
 	//}
+	//printf ("C %d, %d, %d\n", g_p.ceiling[0], g_p.ceiling[1], g_p.ceiling[2]);
+	//printf("|mp %d|\n|r %d|\n|no %d|\n|so %d|\n|we %d|\n|ea %d|\n|s %d|\n|f %d|\n|c %d|\n", g_check.mp, g_check.r, g_check.no, g_check.so, g_check.we, g_check.ea, g_check.s, g_check.f, g_check.c);
 	return (0);
 }
